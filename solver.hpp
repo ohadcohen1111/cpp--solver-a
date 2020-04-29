@@ -13,7 +13,14 @@ namespace solver {
 
         public:
         //constructor
-           // RealVariable (double r);
+            RealVariable (const double& real_= 0.0)
+              : real(real_){}
+        //getters
+            double getReal()
+            {
+                return real;
+            }
+
         //operators   
             RealVariable operator+ (RealVariable x);
             RealVariable operator+ (double x);
@@ -26,22 +33,40 @@ namespace solver {
 
             RealVariable operator^ (int x);
 
-            bool operator== (RealVariable x);
-            bool operator== (int x);
+            RealVariable operator== (RealVariable x);
+            RealVariable operator== (int x);
 
             RealVariable operator/ (int x);
 
-   
+
 
     };
 
      class ComplexVariable
     {
         private:
-            double c_real;
-            int c_image;
+            double c_re;
+            double c_im;
+
 
         public:
+
+        //constructor
+            ComplexVariable (const double& re= 0.0, const double& im= 0.0)
+              : c_re(re), c_im(im){}
+            
+        //getters
+            double getReal() const
+            {
+		        return c_re;
+	        }
+
+	        double getImage() const 
+            {
+		        return c_im;
+	        }
+
+        //operators   
             // ComplexVariable operator* (int x);
             // ComplexVariable operator* (double x);
             friend ComplexVariable operator* (int x, ComplexVariable y);
@@ -61,14 +86,16 @@ namespace solver {
 
             // ComplexVariable operator() (int x);
 
-            bool operator== (ComplexVariable x);
-            bool operator== (int x);
+            ComplexVariable operator== (ComplexVariable x);
+            ComplexVariable operator== (int x);
 
-            complex<double> solve(bool x);
-
+            //complex<double> solve(bool x);
     };
 
+        complex<double> solve(ComplexVariable x);
+        double solve(RealVariable x);
 
-    double solve(bool x);
+
+
 
 }
